@@ -48,13 +48,13 @@ http.createServer((req, res) => {
         res.end();   
     }
 
-    if (recurso_carregado.isFile) {
+    if (recurso_carregado.isFile()) {
         let mimeType = mimeTypes[path.extname(caminho_completo_recurso).substring(1)];
 
         res.writeHead(200, {'content-Type': mimeType});
         let fluxo_arquivo = fs.createReadStream(caminho_completo_recurso);
         fluxo_arquivo.pipe(res);
-    }else if (recurso_carregado.isDirectory) {
+    }else if (recurso_carregado.isDirectory()) {
         res.writeHead(302, {'Location': 'index.html'});
         res.end();
     } else {
